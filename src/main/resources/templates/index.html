@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Whois Search</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="text-center">Whois Search</h1>
+
+  <!-- 검색 입력 필드 -->
+  <form th:action="@{/}" method="get" class="form-inline justify-content-center mb-4">
+    <input type="text" name="query" class="form-control mr-2" placeholder="IP 주소 입력" required>
+    <button type="submit" class="btn btn-primary">검색</button>
+  </form>
+
+  <!-- 검색 결과 표시 -->
+  <div th:if="${whoisResponse != null}">
+    <h2>검색 결과</h2>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>필드</th>
+        <th>값</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Result 정보 -->
+      <tr>
+        <td>Result Code</td>
+        <td th:text="${whoisResponse.response.result.resultCode}"></td>
+      </tr>
+      <tr>
+        <td>Result Message</td>
+        <td th:text="${whoisResponse.response.result.resultMsg}"></td>
+      </tr>
+      <!-- Whois 정보 -->
+      <tr>
+        <td>Query</td>
+        <td th:text="${whoisResponse.response.whois.query}"></td>
+      </tr>
+      <tr>
+        <td>Query Type</td>
+        <td th:text="${whoisResponse.response.whois.queryType}"></td>
+      </tr>
+      <tr>
+        <td>Registry</td>
+        <td th:text="${whoisResponse.response.whois.registry}"></td>
+      </tr>
+      <tr>
+        <td>Country Code</td>
+        <td th:text="${whoisResponse.response.whois.countryCode}"></td>
+      </tr>
+      <!-- ISP 정보 -->
+      <tr>
+        <td>ISP Organization Name (Korean)</td>
+        <td th:text="${whoisResponse.response.whois.korean.isp.netinfo.orgName}"></td>
+      </tr>
+      <tr>
+        <td>ISP Address (Korean)</td>
+        <td th:text="${whoisResponse.response.whois.korean.isp.netinfo.addr}"></td>
+      </tr>
+      <tr>
+        <td>ISP Organization Name (English)</td>
+        <td th:text="${whoisResponse.response.whois.english.isp.netinfo.orgName}"></td>
+      </tr>
+      <tr>
+        <td>ISP Address (English)</td>
+        <td th:text="${whoisResponse.response.whois.english.isp.netinfo.addr}"></td>
+      </tr>
+      <!-- User 정보 -->
+      <tr>
+        <td>User Organization Name (Korean)</td>
+        <td th:text="${whoisResponse.response.whois.korean.user.netinfo.orgName}"></td>
+      </tr>
+      <tr>
+        <td>User Address (Korean)</td>
+        <td th:text="${whoisResponse.response.whois.korean.user.netinfo.addr}"></td>
+      </tr>
+      <tr>
+        <td>User Organization Name (English)</td>
+        <td th:text="${whoisResponse.response.whois.english.user.netinfo.orgName}"></td>
+      </tr>
+      <tr>
+        <td>User Address (English)</td>
+        <td th:text="${whoisResponse.response.whois.english.user.netinfo.addr}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 부트스트랩 자바스크립트 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
